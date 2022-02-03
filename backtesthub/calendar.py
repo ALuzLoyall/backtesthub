@@ -4,6 +4,7 @@ from holidays import BR, US
 from datetime import date, datetime
 from typing import Sequence
 from pandas import bdate_range
+import pandas_market_calendars as mcal
 
 from .utils.config import (
     _DEFAULT_SDATE, 
@@ -48,9 +49,9 @@ class Calendar:
         if not holidays:
             years = [y for y in range(start.year, end.year+20)]
             if country.upper() in ["BR", "BRAZIL"]:
-                calendar = BR(state='SP', years = years)
+                calendar = mcal.get_calendar('BMF').schedule(start_date=start, end_date=end)
             elif country.upper() in ["US", "USA", "UNITED STATES"]:
-                calendar = US(state='NY', years = years)
+                calendar = mcal.get_calendar('NYSE').schedule(start_date=start, end_date=end)
         
         self.__holidays = tuple(calendar.keys())
 

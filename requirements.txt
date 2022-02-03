@@ -6,3 +6,4 @@ python-dotenv==0.19.0
 pydantic==1.8.2
 SQLAlchemy==1.4.22
 workdays==1.4
+pandas_market_calendars==3.3
